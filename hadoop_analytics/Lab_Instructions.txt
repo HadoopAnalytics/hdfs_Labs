@@ -1,0 +1,19 @@
+#Create a directory in hdfs and upload the data
+-----------------------------------------------------
+hadoop fs -mkdir -p /opt/data
+hadoop fs -put amazon-meta.txt /opt/data
+hadoop fs -ls /opt/data
+
+hadoop jar BuyingFrequencyAnalyzer.jar microbok.frequency.BuyingFrequencyAnalyzer /opt/data /opt/data/frequency-output1
+
+hadoop fs -cat /opt/data/frequency-output1/part-r-00000
+
+hadoop fs -get  /opt/data/frequency-output1/part-r-00000 1.data
+
+
+sudo yum install gnuplot
+gnuplot buyfreq.plot
+
+#PNG will get generated. Open this PNG in local browser
+
+firefox buyfreq.png
